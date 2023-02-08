@@ -30,15 +30,34 @@ function displayTransition(layer,transition){
 	layer.rect(layer.width/2,transition.anim*layer.height/4,layer.width,transition.anim*layer.height/2)
 	layer.rect(layer.width/2,layer.height-transition.anim*layer.height/4,layer.width,transition.anim*layer.height/2)
 	if(transition.trigger){
-		transition.anim=round(transition.anim*5-1)/5
+		transition.anim=round(transition.anim*5+1)/5
 		if(transition.anim>1.1){
 			transition.trigger = false
 			stage.scene=transition.scene
 			if(stage.scene=='level'){
-				game.level=transition.level
-				game.zone=transition.zone
+				for(let a=0,la=levels.length;a<la;a++){
+					if(levels[a].position.x==game.position.x&&levels[a].position.y==game.position.y){
+						game.zone=a
+					}
+				}
 				resetWorld()
-				generateWorld(graphics.main,levels[game.level][game.zone])
+				generateWorld(graphics.main,levels[game.zone])
+				for(let a=0,la=entities.players.length;a<la;a++){
+					switch(transition.direction){
+						case 0:
+							entities.players[0].position.x=0
+						break
+						case 1:
+							entities.players[0].position.x=game.edge.x
+						break
+						case 2:
+							entities.players[0].position.y=0
+						break
+						case 3:
+							entities.players[0].position.y=game.edge.y
+						break
+					}
+				}
 			}
 		}
 	}
@@ -156,13 +175,14 @@ function resetWorld(){
 	entities.clouds=[]
 	entities.walls=[]
 	entities.enemies=[]
-	entities.players=[]
 	entities.particles=[]
 }
 function generateWorld(layer,level){
 	if(level.map.length>0&&level.map[0].length>0){
 		game.edge.x=level.map[0].length*game.tileSize
 		game.edge.y=level.map.length*game.tileSize
+		game.position.x=level.position.x
+		game.position.y=level.position.y
 		stage.focus.x=game.edge.x/2
 		stage.focus.y=game.edge.y/2
 		for(let a=0,la=level.map.length;a<la;a++){
@@ -171,15 +191,9 @@ function generateWorld(layer,level){
 					entities.walls.push(new wall(layer,b*game.tileSize+floor((level.map[a][b]%100)/10)*game.tileSize/2+game.tileSize/2,a*game.tileSize+(level.map[a][b]%10)*game.tileSize/2+game.tileSize/2,floor(level.map[a][b]/100),floor((level.map[a][b]%100)/10)*game.tileSize+game.tileSize,(level.map[a][b]%10)*game.tileSize+game.tileSize))
 				}else if(level.map[a][b]<-1){
 					entities.enemies.push(new enemy(layer,b*game.tileSize+game.tileSize/2,a*game.tileSize+game.tileSize/2,-level.map[a][b]-1))
-				}else if(level.map[a][b]==-1){
-					if(transition.mode==1){
-						entities.players.push(new player(layer,game.check.x,game.check.y,game.check.type,0))
-					}else{
-						entities.players.push(new player(layer,b*game.tileSize+game.tileSize/2,a*game.tileSize+game.tileSize/2,0,0))
-						game.check.x=b*game.tileSize+game.tileSize/2
-						game.check.y=a*game.tileSize+game.tileSize/2
-						game.check.type=0
-					}
+				}else if(level.map[a][b]==-1&&game.firstGen==0){
+					entities.players.push(new player(layer,b*game.tileSize+game.tileSize/2,a*game.tileSize+game.tileSize/2,0,0))
+					game.firstGen=1
 				}
 			}
 		}

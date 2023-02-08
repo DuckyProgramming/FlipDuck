@@ -171,6 +171,26 @@ class player extends partisan{
                     inputs.keys[1][2]=false
                     this.goal.movement.gravity*=-1
                 }
+                if(this.position.x>=game.edge.x&&game.position.x<game.edgePosition.x-1){
+                    transition.trigger=true
+                    transition.direction=0
+                    game.position.x++
+                }
+                if(this.position.x<=0&&game.position.x>0){
+                    transition.trigger=true
+                    transition.direction=1
+                    game.position.x--
+                }
+                if(this.position.y>=game.edge.y&&game.position.y<game.edgePosition.y-1){
+                    transition.trigger=true
+                    transition.direction=2
+                    game.position.y++
+                }
+                if(this.position.y<=0&&game.position.y>0){
+                    transition.trigger=true
+                    transition.direction=3
+                    game.position.y--
+                }
             break
 
         }

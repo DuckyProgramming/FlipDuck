@@ -22,11 +22,6 @@ class partisan extends physical{
 		super.update()
 		this.position.x=constrain(this.position.x,0,game.edge.x)
 		this.position.y=constrain(this.position.y,0,game.edge.y)
-		if(game.level==2&&this.position.y>game.edge.y){
-			this.dead=true
-		}else{
-			this.position.y=min(this.position.y,game.edge.y)
-		}
         this.anim.rate+=this.velocity.x
 		this.height=this.base.height*abs(this.movement.gravity)
 		if(this.dead){
