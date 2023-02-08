@@ -1,8 +1,8 @@
 class player extends partisan{
     constructor(layer,x,y,type,direction){
-        super(layer,x,y,type,24,72,100)
-        this.offset.position.y=39
-        this.offset.life.y=-48
+        super(layer,x,y,type,16,45)
+        this.offset.position.y=26
+        this.offset.life.y=-32
         this.trigger.animate=true
         switch(this.type){
             case 0:
@@ -19,7 +19,7 @@ class player extends partisan{
             break
 
         }
-        this.size=1.5
+        this.size=1
     }
     calculateParts(){
         switch(this.type){

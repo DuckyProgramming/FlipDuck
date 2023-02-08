@@ -10,10 +10,10 @@ function setupGraphics(){
 		graphics.backgrounds.push(createGraphics(graphics.main.width,graphics.main.height))
 		setupLayer(graphics.backgrounds[a])
 	}
-	for(let a=0;a<45;a++){
-		for(let b=0;b<30;b++){
+	for(let a=0;a<46;a++){
+		for(let b=0;b<31;b++){
 			graphics.backgrounds[0].fill(100+noise(a+b*b)*60,160+noise(a*a+b)*20+noise(a+b*b)*60,200+noise(a+b*b)*80)
-			graphics.backgrounds[0].rect(10+a*20,10+b*20,20,20)
+			graphics.backgrounds[0].rect(a*20,b*20,20,20)
 		}
 	}
 }

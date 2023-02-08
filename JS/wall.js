@@ -11,7 +11,7 @@ class wall extends physical{
 		switch(this.type){
             case 1:
                 this.layer.fill(40,90,100,this.fade)
-                this.layer.rect(0,0,this.width+2,this.height+2)
+                this.layer.rect(0,0,this.width,this.height)
             break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)

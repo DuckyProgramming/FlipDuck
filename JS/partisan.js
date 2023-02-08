@@ -1,15 +1,13 @@
 class partisan extends physical{
-	constructor(layer,x,y,type,width,height,life){
+	constructor(layer,x,y,type,width,height){
 		super(layer,x,y,type,width,height)
-		this.life=life
 		this.trigger={physics:{resistance:true,gravity:true}}
 		this.offset={position:{x:0,y:0},life:{x:0,y:0}}
-		this.movement={speed:1,gravity:1}
+		this.movement={speed:0.6,gravity:1}
         this.goal={movement:{gravity:this.movement.gravity}}
         this.timers=[0,0]
 		this.squish=[false,false,false,false]
-		this.base={life:this.life}
-		this.collect={life:this.life}
+		this.base={width:this.width,height:this.height}
 		this.size=1
 		this.dead=false
 	}
@@ -30,7 +28,7 @@ class partisan extends physical{
 			this.position.y=min(this.position.y,game.edge.y)
 		}
         this.anim.rate+=this.velocity.x
-		this.collect.life=this.collect.life*0.9+this.life*0.1
+		this.height=this.base.height*abs(this.movement.gravity)
 		if(this.dead){
 			this.status=1
 		}
