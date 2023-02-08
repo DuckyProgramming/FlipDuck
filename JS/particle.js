@@ -1,0 +1,20 @@
+class particle extends entity{
+    constructor(layer,x,y,type,color){
+        super(layer,x,y,type,3)
+        this.color=color
+        this.fade=1
+        this.size=0
+    }
+    display(){
+        this.layer.fill(this.color[0],this.color[1],this.color[2],this.fade)
+        this.layer.noStroke()
+        this.layer.ellipse(this.position.x,this.position.y,this.size,this.size)
+    }
+    update(){
+        this.size+=10
+        if(this.fade<=0){
+            this.remove=true
+        }
+        super.update()
+    }
+}
