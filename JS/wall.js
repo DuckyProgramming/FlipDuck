@@ -1,17 +1,32 @@
 class wall extends physical{
 	constructor(layer,x,y,type,width,height){
 		super(layer,x,y,type,width,height)
+        this.base={width:this.width,height:this.height}
 		this.collide=[entities.enemies,entities.players]
         switch(this.type){
+            case 2:
+                this.width-=20
+                this.height-=24
+                this.position.y+=12
+            break
+            case 3:
+                this.width-=20
+                this.height-=24
+                this.position.y-=12
+            break
         }
 	}
 	display(){
-		this.layer.translate(this.position.x,this.position.y)
+		super.display()
+        this.layer.translate(this.position.x,this.position.y)
 		this.layer.noStroke()
 		switch(this.type){
             case 1:
                 this.layer.fill(40,90,100,this.fade)
                 this.layer.rect(0,0,this.width,this.height)
+            break
+            case 2:
+                this.layer.fill()
             break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)

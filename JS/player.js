@@ -2,7 +2,6 @@ class player extends partisan{
     constructor(layer,x,y,type,direction){
         super(layer,x,y,type,16,45)
         this.offset.position.y=26
-        this.offset.life.y=-32
         this.trigger.animate=true
         switch(this.type){
             case 0:
