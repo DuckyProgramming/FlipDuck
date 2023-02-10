@@ -6,7 +6,6 @@ class partisan extends physical{
         this.goal={movement:{gravity:this.movement.gravity}}
         this.timers=[0,0]
 		this.squish=[false,false,false,false]
-		this.base={width:this.width,height:this.height}
 		this.size=1
 		this.dead=false
 	}

@@ -5,6 +5,7 @@ class physical extends entity{
 		this.offset={position:{x:0,y:0}}
 		this.width=width
 		this.height=height
+		this.base={position:{x:this.position.x,y:this.position.y},width:this.width,height:this.height}
 	}
 	display(){
 		this.layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y)

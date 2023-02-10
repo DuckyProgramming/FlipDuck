@@ -1,7 +1,6 @@
 class wall extends physical{
 	constructor(layer,x,y,type,width,height){
 		super(layer,x,y,type,width,height)
-        this.base={width:this.width,height:this.height}
 		this.collide=[entities.enemies,entities.players]
         switch(this.type){
             case 2:
@@ -19,8 +18,14 @@ class wall extends physical{
                 this.direction=this.height*45/game.tileSize-45
                 this.position.x-=this.width/2-game.tileSize/2
                 this.position.y-=this.height/2-game.tileSize/2
+                this.base.position.x-=this.width/2-game.tileSize/2
+                this.base.position.y-=this.height/2-game.tileSize/2
                 this.width=10
                 this.height=10
+            break
+            case 5:
+                this.width-=10
+                this.height-=10
             break
         }
 	}
@@ -55,6 +60,13 @@ class wall extends physical{
                 }
                 this.layer.pop()
             break
+            case 5:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.quad(-this.width/2,0,0,-this.height/2,this.width/2,0,0,this.height/2)
+                this.layer.fill(200,255,255,this.fade*0.2)
+                this.layer.quad(-this.width/2-3,0,0,-this.height/2-3,this.width/2+3,0,0,this.height/2+3)
+                this.layer.quad(-this.width/2-6,0,0,-this.height/2-6,this.width/2+6,0,0,this.height/2+6)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -69,6 +81,10 @@ class wall extends physical{
                     this.position.x+=sin(this.direction)*-4
                     this.position.y+=cos(this.direction)*-4
                 }
+                if(this.time%(this.length/2)==0){
+                    this.position.x=this.base.position.x
+                    this.position.y=this.base.position.y
+                }
             break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
@@ -80,7 +96,10 @@ class wall extends physical{
                         break
                     }
                     if(!this.collide[a][b].dead){
-                        if(false){
+                        if(this.type==5){
+                            game.check.x=this.position.x
+                            game.check.y=this.position.y
+                            game.check.zone=game.zone
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
                             if(boxCollideBox(this,this.collide[a][b])==0&&this.collide[a][b].velocity.y<0){
