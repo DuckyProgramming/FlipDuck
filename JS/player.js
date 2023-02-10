@@ -46,7 +46,6 @@ class player extends partisan{
     }
     display(){
         this.calculateParts()
-        //super.display()
         this.layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y*this.movement.gravity)
         if(this.fade>0&&this.size>0&&this.movement.gravity!=0){
             this.layer.scale(this.size,this.size*this.movement.gravity)
@@ -121,6 +120,7 @@ class player extends partisan{
             this.layer.scale(1/this.size,1/this.size/this.movement.gravity)
         }
         this.layer.translate(-this.position.x-this.offset.position.x,-this.position.y-this.offset.position.y*this.movement.gravity)
+        //super.display()
     }
     update(){
         super.update()

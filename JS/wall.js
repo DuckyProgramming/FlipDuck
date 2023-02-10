@@ -5,19 +5,18 @@ class wall extends physical{
 		this.collide=[entities.enemies,entities.players]
         switch(this.type){
             case 2:
-                this.width-=20
-                this.height-=24
-                this.position.y+=12
+                this.width-=15
+                this.height-=28
+                this.position.y+=14
             break
             case 3:
-                this.width-=20
-                this.height-=24
-                this.position.y-=12
+                this.width-=15
+                this.height-=28
+                this.position.y-=14
             break
         }
 	}
 	display(){
-		super.display()
         this.layer.translate(this.position.x,this.position.y)
 		this.layer.noStroke()
 		switch(this.type){
@@ -26,10 +25,20 @@ class wall extends physical{
                 this.layer.rect(0,0,this.width,this.height)
             break
             case 2:
-                this.layer.fill()
+                this.layer.fill(200)
+                for(let a=0,la=this.base.width/10;a<la;a++){
+                    this.layer.triangle(-this.base.width/2+this.base.width*a/la,this.height/2,-this.base.width/2+this.base.width*(a+1)/la,this.height/2,-this.base.width/2+this.base.width*(a+0.5)/la,-this.height*11/2)
+                }
+            break
+            case 3:
+                this.layer.fill(200)
+                for(let a=0,la=this.base.width/10;a<la;a++){
+                    this.layer.triangle(-this.base.width/2+this.base.width*a/la,-this.height/2,-this.base.width/2+this.base.width*(a+1)/la,-this.height/2,-this.base.width/2+this.base.width*(a+0.5)/la,this.height*11/2)
+                }
             break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
+        //super.display()
 	}
 	update(){
         switch(this.type){
@@ -38,6 +47,9 @@ class wall extends physical{
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead){
                     switch(this.type){
+                        case 2: case 3:
+                            this.collide[a][b].dead=true
+                        break
                     }
                     if(!this.collide[a][b].dead){
                         if(false){

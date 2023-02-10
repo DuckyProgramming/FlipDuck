@@ -194,7 +194,19 @@ function generateWorld(layer,level){
 				}else if(level.map[a][b]==-1&&game.firstGen==0){
 					entities.players.push(new player(layer,b*game.tileSize+game.tileSize/2,a*game.tileSize+game.tileSize/2,0,0))
 					game.firstGen=1
+					game.check.x=b*game.tileSize+game.tileSize/2
+					game.check.y=a*game.tileSize+game.tileSize/2
+					game.check.level=game.zone
 				}
+			}
+		}
+		if(transition.mode==1){
+			transition.mode=0
+			for(let a=0,la=entities.players.length;a<la;a++){
+				entities.players[a].dead=false
+				entities.players[a].status=0
+				entities.players[a].position.x=game.check.x
+				entities.players[a].position.y=game.check.y
 			}
 		}
 		for(let a=0,la=level.map.length;a<la;a++){

@@ -21,6 +21,11 @@ class partisan extends physical{
 		this.height=this.base.height*abs(this.movement.gravity)
 		if(this.dead){
 			this.status=1
+			if(this.fade<=0){
+				transition.trigger=true
+				transition.level=game.check.level
+				transition.mode=1
+			}
 		}
 		if(this.movement.gravity<this.goal.movement.gravity){
 			this.movement.gravity=round(this.movement.gravity*5+1)/5

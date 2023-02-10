@@ -8,8 +8,9 @@ class physical extends entity{
 	}
 	display(){
 		this.layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y)
-		this.layer.fill(255)
-		this.layer.noStroke()
+		this.layer.noFill()
+		this.layer.stroke(255,0,0)
+		this.layer.strokeWeight(2)
         this.layer.rect(0,-this.offset.position.y,this.width,this.height)
 		this.layer.translate(-this.position.x-this.offset.position.x,-this.position.y-this.offset.position.y)
 	}
