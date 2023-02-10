@@ -23,8 +23,10 @@ class partisan extends physical{
 			this.status=1
 			if(this.fade<=0){
 				transition.trigger=true
-				transition.level=game.check.level
 				transition.mode=1
+				transition.direction=-1
+				game.position.x=levels[game.check.zone].position.x
+				game.position.y=levels[game.check.zone].position.y
 			}
 		}
 		if(this.movement.gravity<this.goal.movement.gravity){

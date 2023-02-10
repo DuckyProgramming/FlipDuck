@@ -196,7 +196,7 @@ function generateWorld(layer,level){
 					game.firstGen=1
 					game.check.x=b*game.tileSize+game.tileSize/2
 					game.check.y=a*game.tileSize+game.tileSize/2
-					game.check.level=game.zone
+					game.check.zone=game.zone
 				}
 			}
 		}

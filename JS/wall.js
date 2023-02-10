@@ -14,6 +14,14 @@ class wall extends physical{
                 this.height-=28
                 this.position.y-=14
             break
+            case 4:
+                this.length=this.width
+                this.direction=this.height*45/game.tileSize-45
+                this.position.x-=this.width/2-game.tileSize/2
+                this.position.y-=this.height/2-game.tileSize/2
+                this.width=10
+                this.height=10
+            break
         }
 	}
 	display(){
@@ -36,18 +44,38 @@ class wall extends physical{
                     this.layer.triangle(-this.base.width/2+this.base.width*a/la,-this.height/2,-this.base.width/2+this.base.width*(a+1)/la,-this.height/2,-this.base.width/2+this.base.width*(a+0.5)/la,this.height*11/2)
                 }
             break
+            case 4:
+                this.layer.fill(200)
+                this.layer.ellipse(0,0,this.width,this.height)
+                this.layer.push()
+                this.layer.rotate(this.time*5)
+                for(let a=0,la=9;a<la;a++){
+                    this.layer.triangle(-this.width/4,0,this.width/4,0,0,-this.height*2)
+                    this.layer.rotate(360/la)
+                }
+                this.layer.pop()
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
 	}
 	update(){
         switch(this.type){
+            case 4:
+                if(this.time%(this.length/2)<this.length/4){
+                    this.position.x+=sin(this.direction)*4
+                    this.position.y+=cos(this.direction)*4
+                }else{
+                    this.position.x+=sin(this.direction)*-4
+                    this.position.y+=cos(this.direction)*-4
+                }
+            break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead){
                     switch(this.type){
-                        case 2: case 3:
+                        case 2: case 3: case 4:
                             this.collide[a][b].dead=true
                         break
                     }
