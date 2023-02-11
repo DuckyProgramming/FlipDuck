@@ -207,6 +207,8 @@ function generateWorld(layer,level){
 				entities.players[a].status=0
 				entities.players[a].position.x=game.check.x
 				entities.players[a].position.y=game.check.y
+				entities.players[a].movement.gravity=game.check.gravity
+				entities.players[a].goal.movement.gravity=game.check.gravity
 			}
 		}
 		for(let a=0,la=level.map.length;a<la;a++){

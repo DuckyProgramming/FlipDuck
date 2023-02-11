@@ -100,6 +100,7 @@ class wall extends physical{
                             game.check.x=this.position.x
                             game.check.y=this.position.y
                             game.check.zone=game.zone
+                            game.check.gravity=this.collide[a][b].goal.movement.gravity
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
                             if(boxCollideBox(this,this.collide[a][b])==0&&this.collide[a][b].velocity.y<0){
