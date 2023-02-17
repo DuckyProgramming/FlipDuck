@@ -17,7 +17,7 @@ class partisan extends physical{
 		this.position.x=constrain(this.position.x,0,game.edge.x)
 		this.position.y=constrain(this.position.y,0,game.edge.y)
         this.anim.rate+=this.velocity.x
-		this.height=this.base.height*abs(this.movement.gravity)
+		this.height=this.base.height*max(0.2,abs(this.movement.gravity))
 		if(this.dead){
 			this.status=1
 			if(this.fade<=0){
