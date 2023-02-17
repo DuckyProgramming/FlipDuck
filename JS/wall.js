@@ -57,7 +57,10 @@ class wall extends physical{
                 this.width=10
                 this.height=10
             break
-            case 5:
+            case 9:
+                this.height-=10
+                this.timers=[0]
+            break
         }
 	}
 	display(){
@@ -117,6 +120,12 @@ class wall extends physical{
                 }
                 this.layer.pop()
             break
+            case 9:
+                this.layer.noFill()
+                this.layer.stroke(0,100,150,this.fade*min(1,max(2-this.timers[0]/15,-15+this.timers[0]/15)))
+                this.layer.strokeWeight(4)
+                this.layer.rect(0,0,this.width-4,this.height-4)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -149,13 +158,27 @@ class wall extends physical{
                     this.position.y=this.base.position.y
                 }
             break
+            case 9:
+                if(this.timers[0]>0){
+                    this.timers[0]++
+                    if(this.timers[0]>=240){
+                        this.timers[0]=0
+                    }
+                }
+            break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
-                if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead){
+                if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
+                &&!((this.type==9)&&this.timers[0]>30)){
                     switch(this.type){
                         case 2: case 3: case 4: case 6: case 7: case 8:
                             this.collide[a][b].dead=true
+                        break
+                        case 9:
+                            if(this.timers[0]==0){
+                                this.timers[0]++
+                            }
                         break
                     }
                     if(!this.collide[a][b].dead){
