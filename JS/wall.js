@@ -13,7 +13,7 @@ class wall extends physical{
                 this.height-=28
                 this.position.y-=14
             break
-            case 4:
+            case 4: case 10:
                 this.length=this.width
                 this.direction=this.height*45/game.tileSize-45
                 this.position.x-=this.width/2-game.tileSize/2
@@ -83,7 +83,7 @@ class wall extends physical{
                     this.layer.triangle(-this.base.width/2+this.base.width*a/la,-this.height/2,-this.base.width/2+this.base.width*(a+1)/la,-this.height/2,-this.base.width/2+this.base.width*(a+0.5)/la,this.height*11/2)
                 }
             break
-            case 4: case 8:
+            case 4: case 8: case 10:
                 this.layer.fill(200)
                 this.layer.ellipse(0,0,this.width,this.height)
                 this.layer.push()
@@ -145,7 +145,7 @@ class wall extends physical{
                     this.position.y=this.base.position.y
                 }
             break
-            case 6: case 7:
+            case 6: case 7: case 10:
                 if(this.time%(this.length/2)<this.length/4){
                     this.position.x+=sin(this.direction)*4
                     this.position.y+=cos(this.direction)*4
@@ -172,7 +172,7 @@ class wall extends physical{
                 if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
                 &&!((this.type==9)&&this.timers[0]>30)){
                     switch(this.type){
-                        case 2: case 3: case 4: case 6: case 7: case 8:
+                        case 2: case 3: case 4: case 6: case 7: case 8: case 10:
                             this.collide[a][b].dead=true
                         break
                         case 9:

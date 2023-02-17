@@ -171,6 +171,30 @@ function boxCollideBox(static,mobile){
 		return -1
 	}
 }
+function outMap(){
+	mapCalculate=[]
+	for(let a=0;a<game.edgePosition.x;a++){
+		mapCalculate.push([])
+		for(let b=0;b<game.edgePosition.y;b++){
+			mapCalculate[a].push(0)
+		}
+	}
+	for(let a=0,la=levels.length;a<la;a++){
+		mapCalculate[levels[a].position.x][levels[a].position.y]=1
+	}
+	mapDisplay=[]
+	for(let a=0;a<game.edgePosition.x;a++){
+		mapDisplay.push('')
+		for(let b=0;b<game.edgePosition.y;b++){
+			if(mapCalculate[a][b]==1){
+				mapDisplay[a]+='#'
+			}else{
+				mapDisplay[a]+='_'
+			}
+		}
+	}
+	print(mapDisplay)
+}
 function updateMouse(layer){
 	inputs.mouse.x=mouseX
 	inputs.mouse.y=mouseY
