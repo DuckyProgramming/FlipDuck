@@ -36,7 +36,7 @@ function displayTransition(layer,transition){
 	layer.rect(layer.width/2,transition.anim*layer.height/4,layer.width,transition.anim*layer.height/2)
 	layer.rect(layer.width/2,layer.height-transition.anim*layer.height/4,layer.width,transition.anim*layer.height/2)
 	if(transition.trigger){
-		transition.anim=round(transition.anim*5+1)/5
+		transition.anim=round(transition.anim*3+1)/3
 		if(transition.anim>1.1){
 			transition.trigger = false
 			stage.scene=transition.scene
@@ -68,7 +68,7 @@ function displayTransition(layer,transition){
 		}
 	}
 	else if(transition.anim>0){
-		transition.anim=round(transition.anim*5-1)/5
+		transition.anim=round(transition.anim*3-1)/3
 	}
 }
 function toggle(base){
