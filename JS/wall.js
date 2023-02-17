@@ -27,6 +27,16 @@ class wall extends physical{
                 this.width-=10
                 this.height-=10
             break
+            case 6:
+                this.length=this.width+150
+                this.direction=this.height*45/game.tileSize-45
+                this.position.x-=this.width/2-game.tileSize/2
+                this.position.y-=this.height/2-game.tileSize/2
+                this.base.position.x-=this.width/2-game.tileSize/2
+                this.base.position.y-=this.height/2-game.tileSize/2
+                this.width=20
+                this.height=20
+            break
         }
 	}
 	display(){
@@ -67,6 +77,17 @@ class wall extends physical{
                 this.layer.quad(-this.width/2-3,0,0,-this.height/2-3,this.width/2+3,0,0,this.height/2+3)
                 this.layer.quad(-this.width/2-6,0,0,-this.height/2-6,this.width/2+6,0,0,this.height/2+6)
             break
+            case 6:
+                this.layer.fill(200)
+                this.layer.ellipse(0,0,this.width,this.height)
+                this.layer.push()
+                this.layer.rotate(this.time*5)
+                for(let a=0,la=9;a<la;a++){
+                    this.layer.triangle(-this.width/4,0,this.width/4,0,0,-this.height*3/2)
+                    this.layer.rotate(360/la)
+                }
+                this.layer.pop()
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -86,12 +107,25 @@ class wall extends physical{
                     this.position.y=this.base.position.y
                 }
             break
+            case 6:
+                if(this.time%(this.length)<this.length/2){
+                    this.position.x+=sin(this.direction)*2
+                    this.position.y+=cos(this.direction)*2
+                }else{
+                    this.position.x+=sin(this.direction)*-2
+                    this.position.y+=cos(this.direction)*-2
+                }
+                if(this.time%(this.length)==0){
+                    this.position.x=this.base.position.x
+                    this.position.y=this.base.position.y
+                }
+            break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead){
                     switch(this.type){
-                        case 2: case 3: case 4:
+                        case 2: case 3: case 4: case 6:
                             this.collide[a][b].dead=true
                         break
                     }

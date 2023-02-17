@@ -173,7 +173,7 @@ function updateMouse(layer){
 }
 function resetWorld(){
 	entities.clouds=[]
-	entities.walls=[]
+	entities.walls=[[],[]]
 	entities.enemies=[]
 	entities.particles=[]
 }
@@ -187,8 +187,8 @@ function generateWorld(layer,level){
 		stage.focus.y=game.edge.y/2
 		for(let a=0,la=level.map.length;a<la;a++){
 			for(let b=0,lb=level.map[a].length;b<lb;b++){
-				if(level.map[a][b]>=100&&floor(level.map[a][b]/100)!=4&&floor(level.map[a][b]/100)!=31&&floor(level.map[a][b]/100)!=56){
-					entities.walls.push(new wall(layer,b*game.tileSize+floor((level.map[a][b]%100)/10)*game.tileSize/2+game.tileSize/2,a*game.tileSize+(level.map[a][b]%10)*game.tileSize/2+game.tileSize/2,floor(level.map[a][b]/100),floor((level.map[a][b]%100)/10)*game.tileSize+game.tileSize,(level.map[a][b]%10)*game.tileSize+game.tileSize))
+				if(level.map[a][b]>=10){
+					entities.walls[types.wall[floor(level.map[a][b]/100)].layer].push(new wall(layer,b*game.tileSize+floor((level.map[a][b]%100)/10)*game.tileSize/2+game.tileSize/2,a*game.tileSize+(level.map[a][b]%10)*game.tileSize/2+game.tileSize/2,floor(level.map[a][b]/100),floor((level.map[a][b]%100)/10)*game.tileSize+game.tileSize,(level.map[a][b]%10)*game.tileSize+game.tileSize))
 				}else if(level.map[a][b]<-1){
 					entities.enemies.push(new enemy(layer,b*game.tileSize+game.tileSize/2,a*game.tileSize+game.tileSize/2,-level.map[a][b]-1))
 				}else if(level.map[a][b]==-1&&game.firstGen==0){
@@ -211,13 +211,6 @@ function generateWorld(layer,level){
 				entities.players[a].goal.movement.gravity=game.check.gravity
 			}
 		}
-		for(let a=0,la=level.map.length;a<la;a++){
-			for(let b=0,lb=level.map[a].length;b<lb;b++){
-				if(level.map[a][b]>=100&&(floor(level.map[a][b]/100)==4||floor(level.map[a][b]/100)==31||floor(level.map[a][b]/100)==56)){
-					entities.walls.push(new wall(layer,b*game.tileSize+floor((level.map[a][b]%100)/10)*game.tileSize/2+game.tileSize/2,a*game.tileSize+(level.map[a][b]%10)*game.tileSize/2+game.tileSize/2,floor(level.map[a][b]/100),floor((level.map[a][b]%100)/10)*game.tileSize+game.tileSize,(level.map[a][b]%10)*game.tileSize+game.tileSize))
-				}
-			}
-		}
 	}
-	run={back:[],fore:[entities.enemies,entities.players,entities.particles,entities.walls],info:[entities.enemies,entities.players]}
+	run={back:[],fore:[entities.enemies,entities.players,entities.particles,entities.walls[0],entities.walls[1]],info:[entities.enemies,entities.players]}
 }
