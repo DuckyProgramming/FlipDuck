@@ -26,6 +26,7 @@ function draw(){
 				}
 			}
 			displayBorder(graphics.main,game.edge)
+			displayLocation(graphics.main,game.position)
 		break
 	}
 	stage.scale=min(width/graphics.main.width,height/graphics.main.height)

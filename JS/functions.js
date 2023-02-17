@@ -22,6 +22,12 @@ function displayBorder(layer,edge){
 		layer.rect(edge.x/2,edge.y-2-a*4,edge.x-8-a*8,4)
 	}
 }
+function displayLocation(layer,position){
+	layer.noStroke()
+	layer.fill(0)
+	layer.textSize(20)
+	layer.text('('+position.x+','+position.y+')',layer.width/2,layer.height-20)
+}
 function displayTransition(layer,transition){
 	layer.noStroke()
 	layer.fill(0)
