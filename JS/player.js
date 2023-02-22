@@ -3,6 +3,7 @@ class player extends partisan{
         super(layer,x,y,type,16,45)
         this.offset.position.y=26
         this.trigger.animate=true
+        this.jumps=0
         switch(this.type){
             case 0:
                 this.anim={direction:direction,eye:[0,0],legs:[{top:24,length:{top:10}},{top:24,length:{top:10}}],arms:[{top:54,length:{top:10}},{top:54,length:{top:10}}]}
@@ -165,7 +166,12 @@ class player extends partisan{
                     this.spin.arms[0].top=-90+sin(this.animSet.loop*12)*60
                     this.spin.arms[1].top=90+sin(this.animSet.loop*12)*60
                 }
-                if((inputs.keys[0][2]||inputs.keys[1][2]||inputs.keys[0][3]||inputs.keys[1][3])&&this.timers[0]>0){
+                if((inputs.keys[0][2]||inputs.keys[1][2]||inputs.keys[0][3]||inputs.keys[1][3])&&(this.timers[0]>0||this.jumps>0)){
+                    if(this.timers[0]>0){
+                        this.timers[0]=0
+                    }else{
+                        this.jumps--
+                    }
                     inputs.keys[0][2]=false
                     inputs.keys[1][2]=false
                     inputs.keys[0][3]=false

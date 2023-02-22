@@ -71,6 +71,11 @@ class wall extends physical{
                 this.width=90
                 this.height=20
             break
+            case 12:
+                this.width-=10
+                this.height-=10
+                this.timers=[0]
+            break
         }
 	}
 	display(){
@@ -140,6 +145,12 @@ class wall extends physical{
                 this.layer.fill(0,100,150,this.fade)
                 this.layer.rect(0,0,this.width,this.height)
             break
+            case 12:
+                this.layer.fill(255,this.fade*min(1,max(1-this.timers[0]/15,-15+this.timers[0]/15)))
+                this.layer.quad(-this.width*3/4,0,0,-this.height*3/4,this.width*3/4,0,0,this.height*3/4)
+                this.layer.fill(200,255,255,this.fade*min(1,max(1-this.timers[0]/15,-15+this.timers[0]/15)))
+                this.layer.quad(-this.width/2,0,0,-this.height/2,this.width/2,0,0,this.height/2)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -172,7 +183,7 @@ class wall extends physical{
                     this.position.y=this.base.position.y
                 }
             break
-            case 9:
+            case 9: case 12:
                 if(this.timers[0]>0){
                     this.timers[0]++
                     if(this.timers[0]>=240){
@@ -184,7 +195,7 @@ class wall extends physical{
 		for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
                 if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
-                &&!((this.type==9)&&this.timers[0]>30)){
+                &&!((this.type==12)&&this.timers[0]>0)&&!((this.type==9)&&this.timers[0]>30)){
                     switch(this.type){
                         case 2: case 3: case 4: case 6: case 7: case 8: case 10:
                             this.collide[a][b].dead=true
@@ -201,6 +212,9 @@ class wall extends physical{
                             game.check.y=this.position.y
                             game.check.zone=game.zone
                             game.check.gravity=this.collide[a][b].goal.movement.gravity
+                        }else if(this.type==12){
+                            this.collide[a][b].jumps++
+                            this.timers[0]++
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
                             if(boxCollideBox(this,this.collide[a][b])==0&&this.collide[a][b].velocity.y<0){
