@@ -186,7 +186,7 @@ class wall extends physical{
             case 9: case 12:
                 if(this.timers[0]>0){
                     this.timers[0]++
-                    if(this.timers[0]>=240){
+                    if(this.timers[0]>=240&&this.type==9){
                         this.timers[0]=0
                     }
                 }

@@ -115,6 +115,13 @@ class player extends partisan{
                             this.layer.line(sin(this.anim.direction-6+g*12)*16,this.parts.beakLevel-1.5,sin(this.anim.direction-6+g*12)*16,this.parts.beakLevel-1)
                         }
                     }
+                    if(this.jumps>0){
+                        this.layer.noStroke()
+                        this.layer.fill(255)
+                        for(let g=0;g<this.jumps;g++){
+                            this.layer.ellipse(16,-48-g*8,4)
+                        }
+                    }
                 break
                 
             }
