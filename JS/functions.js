@@ -241,6 +241,7 @@ function generateWorld(layer,level){
 				entities.players[a].position.y=game.check.y
 				entities.players[a].movement.gravity=game.check.gravity
 				entities.players[a].goal.movement.gravity=game.check.gravity
+				entities.players[a].jumps=0
 			}
 		}
 	}
