@@ -94,6 +94,9 @@ class wall extends physical{
                     }
                 }
             break
+            case 15:
+                this.width-=12
+            break
         }
 	}
 	display(){
@@ -203,6 +206,20 @@ class wall extends physical{
                         }
                         this.layer.rect(-this.width/2+10+h*20,-this.height/2+10+g*20,16,16)
                     }
+                }
+            break
+            case 15:
+                this.layer.fill(25,this.fade)
+                this.layer.triangle(-this.width/2,-this.height/2,-this.width/2,-this.height/2+9,0,-this.height/2)
+                this.layer.quad(this.width/2,this.height/2-9,this.width/2,this.height/2-18,-this.width/2,this.height/2,0,this.height/2)
+                for(let g=0,lg=this.height/18-1;g<lg;g++){
+                    this.layer.quad(-this.width/2,-this.height/2+18+g*18,-this.width/2,-this.height/2+27+g*18,this.width/2,-this.height/2+9+g*18,this.width/2,-this.height/2+g*18)
+                }
+                this.layer.fill(225,225,0,this.fade)
+                this.layer.triangle(this.width/2,this.height/2,this.width/2,this.height/2-9,0,this.height/2)
+                this.layer.quad(-this.width/2,-this.height/2+9,-this.width/2,-this.height/2+18,this.width/2,-this.height/2,0,-this.height/2)
+                for(let g=0,lg=this.height/18-1;g<lg;g++){
+                    this.layer.quad(-this.width/2,-this.height/2+27+g*18,-this.width/2,-this.height/2+36+g*18,this.width/2,-this.height/2+18+g*18,this.width/2,-this.height/2+9+g*18)
                 }
             break
 		}
