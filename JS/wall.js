@@ -79,6 +79,23 @@ class wall extends physical{
             case 13:
                 this.height-=12
             break
+            case 14:
+                this.width=game.edgePosition.x*20
+                this.height=game.edgePosition.y*20
+                this.mapCalculate=[]
+                for(let a=0;a<game.edgePosition.y;a++){
+                    this.mapCalculate.push([])
+                    for(let b=0;b<game.edgePosition.x;b++){
+                        this.mapCalculate[a].push(0)
+                    }
+                }
+                for(let a=0,la=levels.length;a<la;a++){
+                    this.mapCalculate[levels[a].position.y][levels[a].position.x]=1
+                    if(levels[a].entered){
+                        this.mapCalculate[levels[a].position.y][levels[a].position.x]=2
+                    }
+                }
+            break
         }
 	}
 	display(){
@@ -166,6 +183,28 @@ class wall extends physical{
                 this.layer.quad(-this.width/2+9,-this.height/2,-this.width/2,0,-this.width/2,this.height/2,-this.width/2+18,-this.height/2)
                 for(let g=0,lg=this.width/18-1;g<lg;g++){
                     this.layer.quad(-this.width/2+27+g*18,-this.height/2,-this.width/2+36+g*18,-this.height/2,-this.width/2+18+g*18,this.height/2,-this.width/2+9+g*18,this.height/2)
+                }
+            break
+            case 14:
+                this.layer.fill(150,this.fade)
+                this.layer.rect(0,0,this.width+12,this.height+12)
+                this.layer.fill(200,this.fade)
+                this.layer.rect(0,0,this.width+4,this.height+4)
+                for(let g=0,lg=this.mapCalculate.length;g<lg;g++){
+                    for(let h=0,lh=this.mapCalculate[g].length;h<lh;h++){
+                        switch(this.mapCalculate[g][h]){
+                            case 0:
+                                this.layer.fill(0,this.fade)
+                            break
+                            case 1:
+                                this.layer.fill(255,this.fade)
+                            break
+                            case 2:
+                                this.layer.fill(0,255,0,this.fade)
+                            break
+                        }
+                        this.layer.rect(-this.width/2+10+h*20,-this.height/2+10+g*20,16,16)
+                    }
                 }
             break
 		}

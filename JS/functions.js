@@ -217,6 +217,7 @@ function generateWorld(layer,level){
 		game.position.y=level.position.y
 		stage.focus.x=game.edge.x/2
 		stage.focus.y=game.edge.y/2
+		level.entered=true
 		for(let a=0,la=level.map.length;a<la;a++){
 			for(let b=0,lb=level.map[a].length;b<lb;b++){
 				if(level.map[a][b]>=10){
