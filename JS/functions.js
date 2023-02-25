@@ -197,6 +197,9 @@ function outMap(){
 	}
 	print(mapDisplay)
 }
+function quickMap(){
+	entities.walls[1].push(new wall(graphics.main,game.edge.x/2,game.edge.y/2,14,60,60))
+}
 function updateMouse(layer){
 	inputs.mouse.x=mouseX
 	inputs.mouse.y=mouseY
