@@ -72,8 +72,6 @@ class wall extends physical{
                 this.height=20
             break
             case 12:
-                this.width-=10
-                this.height-=10
                 this.timers=[0]
             break
             case 13:
@@ -167,9 +165,9 @@ class wall extends physical{
             break
             case 12:
                 this.layer.fill(255,this.fade*min(1,max(1-this.timers[0]/15,-15+this.timers[0]/15)))
-                this.layer.quad(-this.width*3/4,0,0,-this.height*3/4,this.width*3/4,0,0,this.height*3/4)
-                this.layer.fill(200,255,255,this.fade*min(1,max(1-this.timers[0]/15,-15+this.timers[0]/15)))
                 this.layer.quad(-this.width/2,0,0,-this.height/2,this.width/2,0,0,this.height/2)
+                this.layer.fill(200,255,255,this.fade*min(1,max(1-this.timers[0]/15,-15+this.timers[0]/15)))
+                this.layer.quad(-this.width/3,0,0,-this.height/3,this.width/3,0,0,this.height/3)
             break
             case 13:
                 this.layer.fill(25,this.fade)
@@ -240,9 +238,9 @@ class wall extends physical{
                 }
             break
             case 9: case 12:
-                if(this.timers[0]>0){
+                if(this.timers[0]>0&&!(this.type==9&&this.timers[0]>180)){
                     this.timers[0]++
-                    if(this.timers[0]>=240&&this.type==9){
+                    if(this.timers[0]>=240){
                         this.timers[0]=0
                     }
                 }
