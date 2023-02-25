@@ -155,8 +155,18 @@ class wall extends physical{
                 this.layer.quad(-this.width/2,0,0,-this.height/2,this.width/2,0,0,this.height/2)
             break
             case 13:
-                this.layer.fill(0,this.fade)
-                this.layer.triangle(-this.width/2,-this.height/2,-this.width/2,this.height/2,-this.width/2+18,-this.height/2)
+                this.layer.fill(25,this.fade)
+                this.layer.triangle(-this.width/2,-this.height/2,-this.width/2,0,-this.width/2+9,-this.height/2)
+                this.layer.quad(this.width/2-9,this.height/2,this.width/2,0,this.width/2,-this.height/2,this.width/2-18,this.height/2)
+                for(let g=0,lg=this.width/18-1;g<lg;g++){
+                    this.layer.quad(-this.width/2+18+g*18,-this.height/2,-this.width/2+27+g*18,-this.height/2,-this.width/2+9+g*18,this.height/2,-this.width/2+g*18,this.height/2)
+                }
+                this.layer.fill(225,225,0,this.fade)
+                this.layer.triangle(this.width/2,this.height/2,this.width/2,0,this.width/2-9,this.height/2)
+                this.layer.quad(-this.width/2+9,-this.height/2,-this.width/2,0,-this.width/2,this.height/2,-this.width/2+18,-this.height/2)
+                for(let g=0,lg=this.width/18-1;g<lg;g++){
+                    this.layer.quad(-this.width/2+27+g*18,-this.height/2,-this.width/2+36+g*18,-this.height/2,-this.width/2+18+g*18,this.height/2,-this.width/2+9+g*18,this.height/2)
+                }
             break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
