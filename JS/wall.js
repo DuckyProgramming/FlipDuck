@@ -110,6 +110,9 @@ class wall extends physical{
                 this.height-=15
                 this.position.x-=14
             break
+            case 20:
+                this.width-=24
+            break
         }
 	}
 	display(){
@@ -252,6 +255,11 @@ class wall extends physical{
                     this.layer.triangle(-this.width/2,-this.base.height/2+this.base.height*a/la,-this.width/2,-this.base.height/2+this.base.height*(a+1)/la,this.width*11/2,-this.base.height/2+this.base.height*(a+0.5)/la)
                 }
             break
+            case 20:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.rect(-this.width/3,0,this.width/3,this.height)
+                this.layer.rect(this.width/3,0,this.width/3,this.height)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -316,6 +324,10 @@ class wall extends physical{
                         }else if(this.type==12){
                             this.collide[a][b].jumps++
                             this.timers[0]++
+                        }else if(this.type==20){
+                            if(this.collide[a][b].previous.position.x>this.position.x&&this.collide[a][b].position.x<=this.position.x||this.collide[a][b].previous.position.x<this.position.x&&this.collide[a][b].position.x>=this.position.x){
+                                this.collide[a][b].goal.movement.gravity*=-1
+                            }
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
                             if(boxCollideBox(this,this.collide[a][b])==0&&this.collide[a][b].velocity.y<0){
