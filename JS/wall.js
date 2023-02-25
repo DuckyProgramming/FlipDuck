@@ -238,7 +238,7 @@ class wall extends physical{
                 }
             break
             case 9: case 12:
-                if(this.timers[0]>0&&!(this.type==9&&this.timers[0]>180)){
+                if(this.timers[0]>0&&!(this.type==12&&this.timers[0]>180)){
                     this.timers[0]++
                     if(this.timers[0]>=240){
                         this.timers[0]=0
