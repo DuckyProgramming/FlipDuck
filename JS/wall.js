@@ -100,6 +100,16 @@ class wall extends physical{
             case 16:
                 this.height-=24
             break
+            case 18:
+                this.width-=28
+                this.height-=15
+                this.position.x+=14
+            break
+            case 19:
+                this.width-=28
+                this.height-=15
+                this.position.x-=14
+            break
         }
 	}
 	display(){
@@ -230,6 +240,18 @@ class wall extends physical{
                 this.layer.rect(0,-this.height/3,this.width,this.height/3)
                 this.layer.rect(0,this.height/3,this.width,this.height/3)
             break
+            case 18:
+                this.layer.fill(200)
+                for(let a=0,la=this.base.height/10;a<la;a++){
+                    this.layer.triangle(this.width/2,-this.base.height/2+this.base.height*a/la,this.width/2,-this.base.height/2+this.base.height*(a+1)/la,-this.width*11/2,-this.base.height/2+this.base.height*(a+0.5)/la)
+                }
+            break
+            case 19:
+                this.layer.fill(200)
+                for(let a=0,la=this.base.height/10;a<la;a++){
+                    this.layer.triangle(-this.width/2,-this.base.height/2+this.base.height*a/la,-this.width/2,-this.base.height/2+this.base.height*(a+1)/la,this.width*11/2,-this.base.height/2+this.base.height*(a+0.5)/la)
+                }
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -276,7 +298,7 @@ class wall extends physical{
                 if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
                 &&!((this.type==12)&&this.timers[0]>0)&&!((this.type==9)&&this.timers[0]>30)){
                     switch(this.type){
-                        case 2: case 3: case 4: case 6: case 7: case 8: case 10: case 17:
+                        case 2: case 3: case 4: case 6: case 7: case 8: case 10: case 17: case 18: case 19:
                             this.collide[a][b].dead=true
                         break
                         case 9:
