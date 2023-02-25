@@ -97,6 +97,9 @@ class wall extends physical{
             case 15:
                 this.width-=12
             break
+            case 16:
+                this.height-=24
+            break
         }
 	}
 	display(){
@@ -222,6 +225,11 @@ class wall extends physical{
                     this.layer.quad(-this.width/2,-this.height/2+27+g*18,-this.width/2,-this.height/2+36+g*18,this.width/2,-this.height/2+18+g*18,this.width/2,-this.height/2+9+g*18)
                 }
             break
+            case 16:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.rect(0,-this.height/3,this.width,this.height/3)
+                this.layer.rect(0,this.height/3,this.width,this.height/3)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -294,6 +302,9 @@ class wall extends physical{
                                 if(this.collide[a][b].movement.gravity<0){
                                     this.collide[a][b].timers[0]=5
                                 }
+                                if(this.type==16){
+                                    this.collide[a][b].goal.movement.gravity=1
+                                }
                             }
                             else if(boxCollideBox(this,this.collide[a][b])==1&&this.collide[a][b].velocity.y>0){
                                 this.collide[a][b].position.y=this.position.y-this.height/2-this.collide[a][b].height/2
@@ -301,6 +312,9 @@ class wall extends physical{
                                 this.collide[a][b].velocity.x*=(1-physics.friction)
                                 if(this.collide[a][b].movement.gravity>0){
                                     this.collide[a][b].timers[0]=5
+                                }
+                                if(this.type==16){
+                                    this.collide[a][b].goal.movement.gravity=-1
                                 }
                             }
                             else if(boxCollideBox(this,this.collide[a][b])==2&&this.collide[a][b].velocity.x<0){
