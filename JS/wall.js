@@ -76,6 +76,9 @@ class wall extends physical{
                 this.height-=10
                 this.timers=[0]
             break
+            case 13:
+                this.height-=12
+            break
         }
 	}
 	display(){
@@ -150,6 +153,10 @@ class wall extends physical{
                 this.layer.quad(-this.width*3/4,0,0,-this.height*3/4,this.width*3/4,0,0,this.height*3/4)
                 this.layer.fill(200,255,255,this.fade*min(1,max(1-this.timers[0]/15,-15+this.timers[0]/15)))
                 this.layer.quad(-this.width/2,0,0,-this.height/2,this.width/2,0,0,this.height/2)
+            break
+            case 13:
+                this.layer.fill(0,this.fade)
+                this.layer.triangle(-this.width/2,-this.height/2,-this.width/2,this.height/2,-this.width/2+18,-this.height/2)
             break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
