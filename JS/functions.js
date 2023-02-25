@@ -62,6 +62,10 @@ function displayTransition(layer,transition){
 						case 3:
 							entities.players[0].position.y=game.edge.y
 						break
+						case 4:
+							entities.players[0].position.x=game.edge.x*3/4
+							entities.players[0].position.y=game.edge.y/2
+						break
 					}
 				}
 			}

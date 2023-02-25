@@ -87,10 +87,22 @@ class wall extends physical{
                         this.mapCalculate[a].push(0)
                     }
                 }
+                this.mapCrystal=[]
+                for(let a=0;a<game.edgePosition.y;a++){
+                    this.mapCrystal.push([])
+                    for(let b=0;b<game.edgePosition.x;b++){
+                        this.mapCrystal[a].push(0)
+                    }
+                }
                 for(let a=0,la=levels.length;a<la;a++){
                     this.mapCalculate[levels[a].position.y][levels[a].position.x]=1
                     if(levels[a].entered){
                         this.mapCalculate[levels[a].position.y][levels[a].position.x]=2
+                    }
+                    if(levels[a].crystal){
+                        this.mapCrystal[levels[a].position.y][levels[a].position.x]=1
+                    }else{
+                        this.mapCrystal[levels[a].position.y][levels[a].position.x]=0
                     }
                 }
             break
@@ -112,6 +124,10 @@ class wall extends physical{
             break
             case 20:
                 this.width-=24
+            break
+            case 22:
+                this.width-=24
+                this.position.x+=12
             break
         }
 	}
@@ -221,6 +237,14 @@ class wall extends physical{
                             break
                         }
                         this.layer.rect(-this.width/2+10+h*20,-this.height/2+10+g*20,16,16)
+                        if(this.mapCrystal[g][h]==1){
+                            this.layer.fill(0,200,255,this.fade)
+                            this.layer.quad(-this.width/2+4+h*20,-this.height/2+10+g*20,-this.width/2+10+h*20,-this.height/2+4+g*20,-this.width/2+16+h*20,-this.height/2+10+g*20,-this.width/2+10+h*20,-this.height/2+16+g*20)
+                        }
+                        if(g==game.position.y&&h==game.position.x){
+                            this.layer.fill(255,50,50,this.fade)
+                            this.layer.ellipse(-this.width/2+10+h*20,-this.height/2+10+g*20,10,10)
+                        }
                     }
                 }
             break
@@ -259,6 +283,24 @@ class wall extends physical{
                 this.layer.fill(200,255,255,this.fade)
                 this.layer.rect(-this.width/3,0,this.width/3,this.height)
                 this.layer.rect(this.width/3,0,this.width/3,this.height)
+            break
+            case 21:
+                this.layer.fill(160,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(150,this.fade)
+                this.layer.rect(0,0,this.width*0.9,this.height*0.9)
+                this.layer.fill(levels[game.zone].active*510,this.fade)
+                this.layer.quad(-this.width*0.4,0,0,-this.height*0.4,this.width*0.4,0,0,this.height*0.4)
+                this.layer.fill(levels[game.zone].active*510-310,levels[game.zone].active*510-255,levels[game.zone].active*510-255,this.fade)
+                this.layer.quad(-this.width*0.3,0,0,-this.height*0.3,this.width*0.3,0,0,this.height*0.3)
+            break
+            case 22:
+                this.layer.fill(255,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(255,this.fade/10)
+                for(let g=0;g<10;g++){
+                    this.layer.rect(0,0,this.width+g*4,this.height+g*4)
+                }
             break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
@@ -300,6 +342,11 @@ class wall extends physical{
                     }
                 }
             break
+            case 21:
+                if(levels[game.zone].active<1){
+                    levels[game.zone].active=round(levels[game.zone].active*300+1)/300
+                }
+            break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
@@ -313,6 +360,12 @@ class wall extends physical{
                             if(this.timers[0]==0){
                                 this.timers[0]++
                             }
+                        break
+                        case 22:
+                            transition.trigger=true
+                            transition.direction=4
+                            game.position.x=0
+                            game.position.y=8
                         break
                     }
                     if(!this.collide[a][b].dead){
