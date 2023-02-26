@@ -129,6 +129,16 @@ class wall extends physical{
                 this.width-=24
                 this.position.x+=12
             break
+            case 23:
+                this.length=this.width+game.tileSize*10
+                this.direction=this.height*45/game.tileSize-45
+                this.position.x-=this.width/2-game.tileSize/2
+                this.position.y-=this.height/2-game.tileSize/2
+                this.base.position.x-=this.width/2-game.tileSize/2
+                this.base.position.y-=this.height/2-game.tileSize/2
+                this.width=90
+                this.height=20
+            break
         }
 	}
 	display(){
@@ -194,7 +204,7 @@ class wall extends physical{
                 this.layer.strokeWeight(4)
                 this.layer.rect(0,0,this.width-4,this.height-4)
             break
-            case 11:
+            case 11: case 23:
                 this.layer.fill(0,100,150,this.fade)
                 this.layer.rect(0,0,this.width,this.height)
             break
@@ -321,7 +331,7 @@ class wall extends physical{
                     this.position.y=this.base.position.y
                 }
             break
-            case 6: case 7: case 10: case 11: case 17:
+            case 6: case 7: case 10: case 11: case 17: case 23:
                 if(this.time%(this.length/2)<this.length/4){
                     this.position.x+=sin(this.direction)*4
                     this.position.y+=cos(this.direction)*4
