@@ -231,7 +231,7 @@ function updateMouse(layer){
 }
 function resetWorld(){
 	entities.clouds=[]
-	entities.walls=[[],[]]
+	entities.walls=[[],[],[]]
 	entities.enemies=[]
 	entities.particles=[]
 }
