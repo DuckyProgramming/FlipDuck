@@ -139,7 +139,7 @@ class wall extends physical{
                 this.width=90
                 this.height=20
             break
-            case 24:
+            case 24: case 25: case 26:
                 this.direction=this.height*45/game.tileSize-45
                 this.position.y-=this.height/2-game.tileSize/2
                 this.base.position.y-=this.height/2-game.tileSize/2
@@ -210,7 +210,7 @@ class wall extends physical{
                 this.layer.strokeWeight(4)
                 this.layer.rect(0,0,this.width-4,this.height-4)
             break
-            case 11: case 23: case 24:
+            case 11: case 23: case 24: case 25: case 26:
                 this.layer.fill(0,100,150,this.fade)
                 this.layer.rect(0,0,this.width,this.height)
             break
@@ -364,8 +364,40 @@ class wall extends physical{
                 }
             break
             case 24:
-                this.position.x+=sin(this.direction)*4
-                this.position.y+=cos(this.direction)*4
+                this.velocity.x=sin(this.direction)*4
+                this.velocity.y=cos(this.direction)*4
+                if(this.position.x>game.edge.x+150){
+                    this.position.x-=game.edge.x+300
+                }
+                if(this.position.x<-150){
+                    this.position.x+=game.edge.x+300
+                }
+                if(this.position.y>game.edge.y+60){
+                    this.position.y-=game.edge.y+120
+                }
+                if(this.position.y<-60){
+                    this.position.y+=game.edge.y+120
+                }
+            break
+            case 25:
+                this.velocity.x=sin(this.direction)*8
+                this.velocity.y=cos(this.direction)*8
+                if(this.position.x>game.edge.x+150){
+                    this.position.x-=game.edge.x+300
+                }
+                if(this.position.x<-150){
+                    this.position.x+=game.edge.x+300
+                }
+                if(this.position.y>game.edge.y+60){
+                    this.position.y-=game.edge.y+120
+                }
+                if(this.position.y<-60){
+                    this.position.y+=game.edge.y+120
+                }
+            break
+            case 26:
+                this.velocity.x=sin(this.direction)*16
+                this.velocity.y=cos(this.direction)*16
                 if(this.position.x>game.edge.x+150){
                     this.position.x-=game.edge.x+300
                 }
@@ -398,6 +430,11 @@ class wall extends physical{
                             transition.direction=4
                             game.position.x=0
                             game.position.y=8
+                        break
+                        case 26:
+                            if(this.collide[a][b].position.x+this.collide[a][b].width/4<this.position.x-this.width/2&&this.velocity.x<-2||this.collide[a][b].position.x-this.collide[a][b].width/4>this.position.x+this.width/2&&this.velocity.x>2){
+                                this.collide[a][b].dead=true
+                            }
                         break
                     }
                     if(!this.collide[a][b].dead){
