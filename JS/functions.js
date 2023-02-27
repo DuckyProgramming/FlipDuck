@@ -272,5 +272,5 @@ function generateWorld(layer,level){
 			}
 		}
 	}
-	run={back:[],fore:[entities.enemies,entities.players,entities.particles,entities.walls[0],entities.walls[1]],info:[entities.enemies,entities.players]}
+	run={back:[],fore:[entities.enemies,entities.players,entities.particles,entities.walls[0],entities.walls[1],entities.walls[2]],info:[entities.enemies,entities.players]}
 }
