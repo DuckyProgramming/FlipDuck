@@ -139,11 +139,15 @@ class wall extends physical{
                 this.width=90
                 this.height=20
             break
-            case 24: case 25: case 26:
+            case 24: case 25: case 26: case 27:
                 this.direction=this.height*45/game.tileSize-45
                 this.position.y-=this.height/2-game.tileSize/2
                 this.base.position.y-=this.height/2-game.tileSize/2
                 this.height=20
+                if(this.type==27){
+                    this.position.x-=game.tileSize*4
+                    this.type=24
+                }
             break
         }
 	}
