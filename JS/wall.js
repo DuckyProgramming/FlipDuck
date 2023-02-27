@@ -149,6 +149,10 @@ class wall extends physical{
                     this.type=24
                 }
             break
+            case 28:
+                this.width-=24
+                this.position.x-=12
+            break
         }
 	}
 	display(){
@@ -314,7 +318,7 @@ class wall extends physical{
                 this.layer.fill(levels[game.zone].active*510-310,levels[game.zone].active*510-255,levels[game.zone].active*510-255,this.fade)
                 this.layer.quad(-this.width*0.3,0,0,-this.height*0.3,this.width*0.3,0,0,this.height*0.3)
             break
-            case 22:
+            case 22: case 28:
                 this.layer.fill(255,this.fade)
                 this.layer.rect(0,0,this.width,this.height)
                 this.layer.fill(255,this.fade/10)
@@ -429,7 +433,7 @@ class wall extends physical{
                                 this.timers[0]++
                             }
                         break
-                        case 22:
+                        case 22: case 28:
                             transition.trigger=true
                             transition.direction=4
                             game.position.x=0
