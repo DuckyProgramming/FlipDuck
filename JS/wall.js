@@ -372,11 +372,11 @@ class wall extends physical{
                 if(this.position.x<-150){
                     this.position.x+=game.edge.x+300
                 }
-                if(this.position.y>game.edge.y+150){
-                    this.position.y-=game.edge.y+300
+                if(this.position.y>game.edge.y+60){
+                    this.position.y-=game.edge.y+120
                 }
-                if(this.position.y<-150){
-                    this.position.y+=game.edge.y+300
+                if(this.position.y<-60){
+                    this.position.y+=game.edge.y+120
                 }
             break
         }
