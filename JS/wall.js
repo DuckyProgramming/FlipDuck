@@ -340,9 +340,9 @@ class wall extends physical{
                 this.layer.line(-this.width/2+1,this.height/2-1,this.width/2-1,this.height/2-1)
                 for(let a=0,la=this.width/30;a<la;a++){
                     if(this.type==30){
-                        this.layer.line(-this.width/2+a*30+(this.time*3)%30,-this.height/2+1,-this.width/2+a*30+(this.time*3)%30,this.height/2-1)
+                        this.layer.line(-this.width/2+a*30+(this.time*3)%30+1,-this.height/2+1,-this.width/2+a*30+(this.time*3)%30+1,this.height/2-1)
                     }else {
-                        this.layer.line(-this.width/2+a*30+30-(this.time*3)%30,-this.height/2+1,-this.width/2+a*30+30-(this.time*3)%30,this.height/2-1)
+                        this.layer.line(-this.width/2+a*30+30-(this.time*3)%30-1,-this.height/2+1,-this.width/2+a*30+30-(this.time*3)%30-1,this.height/2-1)
                     }
                 }
             break
