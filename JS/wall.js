@@ -331,6 +331,19 @@ class wall extends physical{
                     this.layer.rect(0,0,this.width+g*4,this.height+g*4)
                 }
             break
+            case 30: case 31:
+                this.layer.fill(0,75,75,this.fade)
+                this.layer.stroke(0,50,50,this.fade)
+                this.layer.strokeWeight(2)
+                this.layer.rect(0,0,this.width-2,this.height-2)
+                for(let a=0,la=this.width/10;a<la;a++){
+                    if(this.type==30){
+                        this.layer.line(-this.width/2+a*10+this.time%10,-this.height/2+1,-this.width/2+a*10+this.time%10,this.height/2-1)
+                    }else {
+                        this.layer.line(-this.width/2+a*10+10-this.time%10,-this.height/2+1,-this.width/2+a*10+10-this.time%10,this.height/2-1)
+                    }
+                }
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -470,6 +483,10 @@ class wall extends physical{
                                 this.collide[a][b].velocity.y=0
                                 if(this.type==16){
                                     this.collide[a][b].goal.movement.gravity=1
+                                }else if(this.type==30){
+                                    this.collide[a][b].position.x+=2
+                                }else if(this.type==31){
+                                    this.collide[a][b].position.x-=2
                                 }else if(this.collide[a][b].movement.gravity<0){
                                     this.collide[a][b].timers[0]=5
                                 }
@@ -480,6 +497,10 @@ class wall extends physical{
                                 this.collide[a][b].velocity.x*=(1-physics.friction)
                                 if(this.type==16){
                                     this.collide[a][b].goal.movement.gravity=-1
+                                }else if(this.type==30){
+                                    this.collide[a][b].position.x+=2
+                                }else if(this.type==31){
+                                    this.collide[a][b].position.x-=2
                                 }else if(this.collide[a][b].movement.gravity>0){
                                     this.collide[a][b].timers[0]=5
                                 }
