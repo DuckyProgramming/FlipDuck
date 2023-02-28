@@ -5,6 +5,7 @@ class entity{
         this.type=type
         this.status=status
         this.velocity={x:0,y:0}
+        this.tempVelocity={x:0,y:0}
         this.base={position:{x:this.position.x,y:this.position.y}}
         this.fade=0
         this.time=0
@@ -22,6 +23,9 @@ class entity{
         }
         this.position.x+=this.velocity.x
         this.position.y+=this.velocity.y
+        this.position.x+=this.tempVelocity.x
+        this.position.y+=this.tempVelocity.y
+        this.tempVelocity={x:0,y:0}
         this.time++
     }
 }
