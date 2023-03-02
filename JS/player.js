@@ -167,6 +167,11 @@ class player extends partisan{
                 }else if(this.anim.direction<-180){
                     this.anim.direction+=360
                 }
+                if(this.timers[1]>0){
+                    this.trigger.physics.resistance=false
+                }else{
+                    this.trigger.physics.resistance=true
+                }
                 if(this.trigger.animate){
                     this.spin.legs[0].top=-90+sin(this.animSet.loop*12)*75
                     this.spin.legs[1].top=90+sin(this.animSet.loop*12)*75
@@ -179,6 +184,7 @@ class player extends partisan{
                     }else{
                         this.jumps--
                     }
+                    this.timers[1]=0
                     inputs.keys[0][2]=false
                     inputs.keys[1][2]=false
                     inputs.keys[0][3]=false
