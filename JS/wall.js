@@ -352,6 +352,12 @@ class wall extends physical{
                 this.layer.strokeWeight(4)
                 this.layer.ellipse(0,0,this.width,this.height)
             break
+            case 33:
+                this.layer.fill(200,255,225,this.fade)
+                this.layer.stroke(150,255,200,this.fade)
+                this.layer.strokeWeight(4)
+                this.layer.ellipse(0,0,this.width,this.height)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -455,8 +461,14 @@ class wall extends physical{
                         this.collide[a][b].timers[0]=10
                         this.collide[a][b].timers[1]=15
                     }
-                }
-                else if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
+                }else if(this.type==33){
+                    if(circleInsideBox(this.collide[a][b],{position:this.position,size:this.width/2})){
+                        this.collide[a][b].velocity.x=(this.collide[a][b].position.x-this.position.x)/dist(this.position.x,this.position.y,this.collide[a][b].position.x,this.collide[a][b].position.y)*30
+                        this.collide[a][b].velocity.y=(this.collide[a][b].position.y-this.position.y)/dist(this.position.x,this.position.y,this.collide[a][b].position.x,this.collide[a][b].position.y)*30
+                        this.collide[a][b].timers[0]=10
+                        this.collide[a][b].timers[1]=15
+                    }
+                }else if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
                 &&!((this.type==12)&&this.timers[0]>0)&&!((this.type==9)&&this.timers[0]>30)){
                     switch(this.type){
                         case 2: case 3: case 4: case 6: case 7: case 8: case 10: case 17: case 18: case 19:
