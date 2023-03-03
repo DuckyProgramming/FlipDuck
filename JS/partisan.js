@@ -16,8 +16,9 @@ class partisan extends physical{
 		super.update()
 		this.position.x=constrain(this.position.x,0,game.edge.x)
 		this.position.y=constrain(this.position.y,0,game.edge.y)
-        this.anim.rate+=this.velocity.x
-		this.height=this.base.height*max(0.2,abs(this.movement.gravity))
+        this.anim.rate+=this.velocity.x*cos(this.movement.spin)+this.velocity.y*sin(this.movement.spin)
+		this.height=this.base.height*max(0.2,abs(this.movement.gravity))*cos(this.movement.spin)+this.base.width*sin(this.movement.spin)
+		this.width=this.base.width*cos(this.movement.spin)+this.base.height*max(0.2,abs(this.movement.gravity))*sin(this.movement.spin)
 		if(this.dead){
 			this.status=1
 			if(this.fade<=0){
@@ -34,12 +35,19 @@ class partisan extends physical{
 		if(this.movement.gravity>this.goal.movement.gravity){
 			this.movement.gravity=round(this.movement.gravity*5-1)/5
 		}
+		if(this.movement.spin<this.goal.movement.spin){
+			this.movement.spin=round(this.movement.spin/18+1)*18
+		}
+		if(this.movement.spin>this.goal.movement.spin){
+			this.movement.spin=round(this.movement.spin/18-1)*18
+		}
 		if(this.trigger.physics.resistance){
 			this.velocity.x*=(1-physics.resistance)
 			this.velocity.y*=(1-physics.resistance)
 		}
 		if(this.trigger.physics.gravity){
-			this.velocity.y+=physics.gravity*this.goal.movement.gravity
+			this.velocity.x+=physics.gravity*this.goal.movement.gravity*sin(this.movement.spin)
+			this.velocity.y+=physics.gravity*this.goal.movement.gravity*cos(this.movement.spin)
 		}
 		if(this.squish[0]&&this.squish[1]||this.squish[2]&&this.squish[3]){
 			this.dead=true

@@ -509,6 +509,7 @@ class wall extends physical{
                             game.check.y=this.position.y
                             game.check.zone=game.zone
                             game.check.gravity=this.collide[a][b].goal.movement.gravity
+                            game.check.spin=this.collide[a][b].goal.movement.spin
                         }else if(this.type==12){
                             this.collide[a][b].jumps++
                             this.timers[0]++
@@ -516,6 +517,10 @@ class wall extends physical{
                             if(this.collide[a][b].previous.position.x>this.position.x&&this.collide[a][b].position.x<=this.position.x||this.collide[a][b].previous.position.x<this.position.x&&this.collide[a][b].position.x>=this.position.x){
                                 this.collide[a][b].goal.movement.gravity*=-1
                             }
+                        }else if(this.type==34){
+                            this.collide[a][b].goal.movement.spin=0
+                        }else if(this.type==35){
+                            this.collide[a][b].goal.movement.spin=90
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
                             if(boxCollideBox(this,this.collide[a][b])==0&&this.collide[a][b].velocity.y<0){
@@ -530,7 +535,7 @@ class wall extends physical{
                                 }
                                 if(this.type==16){
                                     this.collide[a][b].goal.movement.gravity=1
-                                }else if(this.collide[a][b].movement.gravity<0){
+                                }else if(this.collide[a][b].movement.gravity<0&&this.collide[a][b].movement.spin<45){
                                     this.collide[a][b].timers[0]=5
                                 }
                             }
@@ -547,7 +552,7 @@ class wall extends physical{
                                 }
                                 if(this.type==16){
                                     this.collide[a][b].goal.movement.gravity=-1
-                                }else if(this.collide[a][b].movement.gravity>0){
+                                }else if(this.collide[a][b].movement.gravity>0&&this.collide[a][b].movement.spin<45){
                                     this.collide[a][b].timers[0]=5
                                 }
                             }
@@ -555,11 +560,17 @@ class wall extends physical{
                                 this.collide[a][b].position.x=this.position.x+this.width/2+this.collide[a][b].width/2
                                 this.collide[a][b].velocity.x=0
                                 this.collide[a][b].velocity.y*=(1-physics.friction)
+                                if(this.collide[a][b].movement.gravity<0&&this.collide[a][b].movement.spin>45){
+                                    this.collide[a][b].timers[0]=5
+                                }
                             }
                             else if(boxCollideBox(this,this.collide[a][b])==3&&this.collide[a][b].velocity.x>0){
                                 this.collide[a][b].position.x=this.position.x-this.width/2-this.collide[a][b].width/2
                                 this.collide[a][b].velocity.x=0
                                 this.collide[a][b].velocity.y*=(1-physics.friction)
+                                if(this.collide[a][b].movement.gravity>0&&this.collide[a][b].movement.spin>45){
+                                    this.collide[a][b].timers[0]=5
+                                }
                             }
                         }
                     }

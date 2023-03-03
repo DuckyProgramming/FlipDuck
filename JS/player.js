@@ -47,10 +47,11 @@ class player extends partisan{
     }
     display(){
         this.calculateParts()
-        this.layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y*this.movement.gravity)
+        this.layer.push()
+        this.layer.translate(this.position.x+this.offset.position.x*cos(this.movement.spin)+this.offset.position.y*sin(this.movement.spin)*this.movement.gravity,this.position.y+this.offset.position.y*cos(this.movement.spin)*this.movement.gravity-this.offset.position.x*sin(this.movement.spin))
         if(this.fade>0&&this.size>0&&this.movement.gravity!=0){
-            this.layer.scale(this.size,this.size*this.movement.gravity)
             this.layer.rotate(this.movement.spin)
+            this.layer.scale(this.size,this.size*this.movement.gravity*(cos(this.movement.spin)-sin(this.movement.spin)))
             switch(this.type){
                 case 0:
                     for(let g=0;g<2;g++){
@@ -125,10 +126,8 @@ class player extends partisan{
                     }
                 break
             }
-            this.layer.rotate(-this.movement.spin)
-            this.layer.scale(1/this.size,1/this.size/this.movement.gravity)
         }
-        this.layer.translate(-this.position.x-this.offset.position.x,-this.position.y-this.offset.position.y*this.movement.gravity)
+        this.layer.pop()
         //super.display()
     }
     update(){
@@ -137,14 +136,16 @@ class player extends partisan{
             case 0:
                 this.animSet.active=false
                 if(inputs.keys[0][0]||inputs.keys[1][0]){
-                    this.velocity.x-=this.movement.speed
+                    this.velocity.x-=this.movement.speed*cos(this.movement.spin)
+                    this.velocity.y-=this.movement.speed*sin(this.movement.spin)
                     if(this.goal.anim.direction>-75){
                         this.goal.anim.direction-=15
                     }
                     this.animSet.active=toggle(this.animSet.active)
                 }
                 if(inputs.keys[0][1]||inputs.keys[1][1]){
-                    this.velocity.x+=this.movement.speed
+                    this.velocity.x+=this.movement.speed*cos(this.movement.spin)
+                    this.velocity.y+=this.movement.speed*sin(this.movement.spin)
                     if(this.goal.anim.direction<75){
                         this.goal.anim.direction+=15
                     }

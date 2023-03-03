@@ -276,6 +276,8 @@ function generateWorld(layer,level){
 				entities.players[a].position.y=game.check.y
 				entities.players[a].movement.gravity=game.check.gravity
 				entities.players[a].goal.movement.gravity=game.check.gravity
+				entities.players[a].movement.spin=game.check.spin
+				entities.players[a].goal.movement.spin=game.check.spin
 				entities.players[a].velocity.x=constrain(entities.players[a].velocity.x,-4,4)
 				entities.players[a].velocity.y=constrain(entities.players[a].velocity.y,-4,4)
 				entities.players[a].jumps=0
