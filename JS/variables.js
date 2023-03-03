@@ -34,6 +34,8 @@ types={
         {layer:2},
         {layer:0},
         {layer:0},
+        {layer:0},
+        {layer:0},
     ],
 }
 stage={scale:0,focus:{x:0,y:0,scale:0},scene:'level'}

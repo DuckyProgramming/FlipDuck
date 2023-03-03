@@ -2,8 +2,8 @@ class partisan extends physical{
 	constructor(layer,x,y,type,width,height){
 		super(layer,x,y,type,width,height)
 		this.trigger={physics:{resistance:true,gravity:true}}
-		this.movement={speed:0.6,gravity:1}
-        this.goal={movement:{gravity:this.movement.gravity}}
+		this.movement={speed:0.6,gravity:1,spin:0}
+        this.goal={movement:{gravity:this.movement.gravity,spin:this.movement.spin}}
         this.timers=[0,0]
 		this.squish=[false,false,false,false]
 		this.size=1

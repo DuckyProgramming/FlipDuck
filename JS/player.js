@@ -50,6 +50,7 @@ class player extends partisan{
         this.layer.translate(this.position.x+this.offset.position.x,this.position.y+this.offset.position.y*this.movement.gravity)
         if(this.fade>0&&this.size>0&&this.movement.gravity!=0){
             this.layer.scale(this.size,this.size*this.movement.gravity)
+            this.layer.rotate(this.movement.spin)
             switch(this.type){
                 case 0:
                     for(let g=0;g<2;g++){
@@ -123,8 +124,8 @@ class player extends partisan{
                         }
                     }
                 break
-                
             }
+            this.layer.rotate(-this.movement.spin)
             this.layer.scale(1/this.size,1/this.size/this.movement.gravity)
         }
         this.layer.translate(-this.position.x-this.offset.position.x,-this.position.y-this.offset.position.y*this.movement.gravity)

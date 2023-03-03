@@ -358,6 +358,18 @@ class wall extends physical{
                 this.layer.strokeWeight(4)
                 this.layer.ellipse(0,0,this.width,this.height)
             break
+            case 34:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.rect(0,0,this.width/2,this.height/2)
+                this.layer.triangle(-this.width/2,-this.height/4,this.width/2,-this.height/4,0,-this.height*7/8)
+                this.layer.triangle(-this.width/2,this.height/4,this.width/2,this.height/4,0,this.height*7/8)
+            break
+            case 35:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.rect(0,0,this.width/2,this.height/2)
+                this.layer.triangle(-this.width/4,-this.height/2,-this.width/4,this.height/2,-this.width*7/8,0)
+                this.layer.triangle(this.width/4,-this.height/2,this.width/4,this.height/2,this.width*7/8,0)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
