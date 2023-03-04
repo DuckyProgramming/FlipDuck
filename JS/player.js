@@ -128,7 +128,7 @@ class player extends partisan{
             }
         }
         this.layer.pop()
-        super.display()
+        //super.display()
     }
     update(){
         super.update()

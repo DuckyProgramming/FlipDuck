@@ -158,6 +158,10 @@ class wall extends physical{
                 this.width-=24
                 this.position.x-=12
             break
+            case 36:
+                this.width-=10
+                this.timers=[0]
+            break
         }
 	}
 	display(){
@@ -217,7 +221,7 @@ class wall extends physical{
                 }
                 this.layer.pop()
             break
-            case 9:
+            case 9: case 36:
                 this.layer.noFill()
                 this.layer.stroke(0,100,150,this.fade*min(1,max(2-this.timers[0]/15,-15+this.timers[0]/15)))
                 this.layer.strokeWeight(4)
@@ -402,7 +406,7 @@ class wall extends physical{
                     this.position.y=this.base.position.y
                 }
             break
-            case 9: case 12:
+            case 9: case 12: case 36:
                 if(this.timers[0]>0&&!(this.type==12&&this.timers[0]>180)){
                     this.timers[0]++
                     if(this.timers[0]>=240){
@@ -481,12 +485,12 @@ class wall extends physical{
                         this.collide[a][b].timers[1]=15
                     }
                 }else if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
-                &&!((this.type==12)&&this.timers[0]>0)&&!((this.type==9)&&this.timers[0]>30)){
+                &&!((this.type==12)&&this.timers[0]>0)&&!((this.type==9||this.type==36)&&this.timers[0]>30)){
                     switch(this.type){
                         case 2: case 3: case 4: case 6: case 7: case 8: case 10: case 17: case 18: case 19:
                             this.collide[a][b].dead=true
                         break
-                        case 9:
+                        case 9: case 36:
                             if(this.timers[0]==0){
                                 this.timers[0]++
                             }
