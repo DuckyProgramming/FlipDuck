@@ -128,14 +128,14 @@ class player extends partisan{
             }
         }
         this.layer.pop()
-        //super.display()
+        super.display()
     }
     update(){
         super.update()
         switch(this.type){
             case 0:
                 this.animSet.active=false
-                if(inputs.keys[0][0]||inputs.keys[1][0]){
+                if((inputs.keys[0][0]||inputs.keys[1][0])&&(this.movement.spin<45||this.movement.gravity<0)||(inputs.keys[0][1]||inputs.keys[1][1])&&this.movement.spin>45&&this.movement.gravity>0){
                     this.velocity.x-=this.movement.speed*cos(this.movement.spin)
                     this.velocity.y-=this.movement.speed*sin(this.movement.spin)
                     if(this.goal.anim.direction>-75){
@@ -143,7 +143,7 @@ class player extends partisan{
                     }
                     this.animSet.active=toggle(this.animSet.active)
                 }
-                if(inputs.keys[0][1]||inputs.keys[1][1]){
+                if((inputs.keys[0][1]||inputs.keys[1][1])&&(this.movement.spin<45||this.movement.gravity<0)||(inputs.keys[0][0]||inputs.keys[1][0])&&this.movement.spin>45&&this.movement.gravity>0){
                     this.velocity.x+=this.movement.speed*cos(this.movement.spin)
                     this.velocity.y+=this.movement.speed*sin(this.movement.spin)
                     if(this.goal.anim.direction<75){
