@@ -196,7 +196,7 @@ class wall extends physical{
                 this.layer.pop()
             break
             case 5:
-                if(game.check.x==this.position.x&&game.check.y==this.position.y&&game.check.zone==game.zone){
+                if(dist(game.check.x,game.check.y,this.position.x,this.position.y)<game.tileSize&&game.check.zone==game.zone){
                     this.layer.fill(200,255,200,this.fade)
                     this.layer.quad(-this.width/2,0,0,-this.height/2,this.width/2,0,0,this.height/2)
                     this.layer.fill(200,255,200,this.fade*0.2)
@@ -512,6 +512,8 @@ class wall extends physical{
                             game.check.x=this.position.x
                             game.check.y=this.position.y
                             game.check.zone=game.zone
+                            game.check.width=this.collide[a][b].width
+                            game.check.height=this.collide[a][b].height
                             game.check.gravity=this.collide[a][b].goal.movement.gravity
                             game.check.spin=this.collide[a][b].goal.movement.spin
                         }else if(this.type==12){
@@ -527,7 +529,7 @@ class wall extends physical{
                             this.collide[a][b].goal.movement.spin=90
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
-                            if(boxCollideBox(this,this.collide[a][b])==0&&this.collide[a][b].velocity.y<0){
+                            if(boxCollideBox(this,this.collide[a][b])==0&&(this.collide[a][b].velocity.y<0)){
                                 this.collide[a][b].position.y=this.position.y+this.height/2+this.collide[a][b].height/2
                                 this.collide[a][b].velocity.y=0
                                 if(this.type==30){
@@ -543,7 +545,7 @@ class wall extends physical{
                                     this.collide[a][b].timers[0]=5
                                 }
                             }
-                            else if(boxCollideBox(this,this.collide[a][b])==1&&this.collide[a][b].velocity.y>0){
+                            else if(boxCollideBox(this,this.collide[a][b])==1&&(this.collide[a][b].velocity.y>0)){
                                 this.collide[a][b].position.y=this.position.y-this.height/2-this.collide[a][b].height/2
                                 this.collide[a][b].velocity.y=0
                                 this.collide[a][b].velocity.x*=(1-physics.friction)
@@ -560,7 +562,7 @@ class wall extends physical{
                                     this.collide[a][b].timers[0]=5
                                 }
                             }
-                            else if(boxCollideBox(this,this.collide[a][b])==2&&this.collide[a][b].velocity.x<0){
+                            else if(boxCollideBox(this,this.collide[a][b])==2&&(this.collide[a][b].velocity.x<0)){
                                 this.collide[a][b].position.x=this.position.x+this.width/2+this.collide[a][b].width/2
                                 this.collide[a][b].velocity.x=0
                                 this.collide[a][b].velocity.y*=(1-physics.friction)
@@ -568,7 +570,7 @@ class wall extends physical{
                                     this.collide[a][b].timers[0]=5
                                 }
                             }
-                            else if(boxCollideBox(this,this.collide[a][b])==3&&this.collide[a][b].velocity.x>0){
+                            else if(boxCollideBox(this,this.collide[a][b])==3&&(this.collide[a][b].velocity.x>0)){
                                 this.collide[a][b].position.x=this.position.x-this.width/2-this.collide[a][b].width/2
                                 this.collide[a][b].velocity.x=0
                                 this.collide[a][b].velocity.y*=(1-physics.friction)
