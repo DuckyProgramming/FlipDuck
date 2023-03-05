@@ -162,6 +162,11 @@ class wall extends physical{
                 this.width-=10
                 this.timers=[0]
             break
+            case 37:
+                this.width-=15
+                this.height-=15
+                this.type=1
+            break
         }
 	}
 	display(){
