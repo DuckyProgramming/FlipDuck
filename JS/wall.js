@@ -167,6 +167,9 @@ class wall extends physical{
                 this.height-=15
                 this.type=1
             break
+            case 42: case 43: case 44: case 45:
+                this.height-=10
+            break
         }
 	}
 	display(){
@@ -395,6 +398,30 @@ class wall extends physical{
                 this.layer.fill(200,255,255,this.fade)
                 this.layer.triangle(-this.width/2,this.height*3/8,this.width/2,this.height*3/8,0,-this.height*5/8)
             break
+            case 42:
+                this.layer.fill(0,100,150,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.triangle(5,-7,5,7,-7,0)
+            break
+            case 43:
+                this.layer.fill(0,100,150,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.triangle(-5,-7,-5,7,7,0)
+            break
+            case 44:
+                this.layer.fill(0,100,150,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.triangle(-7,5,7,5,0,-7)
+            break
+            case 45:
+                this.layer.fill(0,100,150,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.triangle(-7,-5,7,-5,0,7)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -488,6 +515,12 @@ class wall extends physical{
                     this.position.y+=game.edge.y+120
                 }
             break
+            case 42: case 43:
+                this.velocity.x*=1-physics.resistance
+            break
+            case 44: case 45:
+                this.velocity.y*=1-physics.resistance
+            break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
             for(let b=0,lb=this.collide[a].length;b<lb;b++){
@@ -526,6 +559,18 @@ class wall extends physical{
                             if(this.collide[a][b].position.x+this.collide[a][b].width/4<this.position.x-this.width/2&&this.velocity.x<-2||this.collide[a][b].position.x-this.collide[a][b].width/4>this.position.x+this.width/2&&this.velocity.x>2){
                                 this.collide[a][b].dead=true
                             }
+                        break
+                        case 42:
+                            this.velocity.x=-25
+                        break
+                        case 43:
+                            this.velocity.x=25
+                        break
+                        case 44:
+                            this.velocity.y=-15
+                        break
+                        case 45:
+                            this.velocity.y=15
                         break
                     }
                     if(!this.collide[a][b].dead){
