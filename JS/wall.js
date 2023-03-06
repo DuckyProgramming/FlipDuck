@@ -379,6 +379,14 @@ class wall extends physical{
                 this.layer.triangle(-this.width/6,-this.height/3,-this.width/6,this.height/3,-this.width*7/12,0)
                 this.layer.triangle(this.width/6,-this.height/3,this.width/6,this.height/3,this.width*7/12,0)
             break
+            case 38:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.triangle(-this.width*3/8,-this.height/2,-this.width*3/8,this.height/2,this.width*5/8,0)
+            break
+            case 39:
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.triangle(this.width*3/8,-this.height/2,this.width*3/8,this.height/2,-this.width*5/8,0)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -532,6 +540,12 @@ class wall extends physical{
                             this.collide[a][b].goal.movement.spin=0
                         }else if(this.type==35){
                             this.collide[a][b].goal.movement.spin=90
+                        }else if(this.type==38){
+                            this.collide[a][b].velocity.x=40
+                            this.collide[a][b].velocity.y=0
+                        }else if(this.type==39){
+                            this.collide[a][b].velocity.x=-40
+                            this.collide[a][b].velocity.y=0
                         }else{
                             this.collide[a][b].squish[boxCollideBox(this,this.collide[a][b])]=true
                             if(boxCollideBox(this,this.collide[a][b])==0&&(this.collide[a][b].velocity.y<0)){
