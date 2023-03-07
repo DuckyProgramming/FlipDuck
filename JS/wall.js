@@ -438,6 +438,15 @@ class wall extends physical{
                 this.layer.quad(-this.width*0.3,-this.width*0.8,0,-this.width*1.1,this.width*0.3,-this.width*0.8,0,-this.width*0.5)
                 this.layer.quad(-this.width*0.3,this.width*0.8,0,this.width*1.1,this.width*0.3,this.width*0.8,0,this.width*0.5)
             break
+            case 48:
+                this.layer.fill(100,this.fade)
+                this.layer.rect(0,0,this.width,this.height,20)
+                this.layer.fill(120,this.fade)
+                this.layer.rect(0,0,this.width-20,this.height-20,10)
+                this.layer.fill(0)
+                this.layer.textSize(50)
+                this.layer.text('End',0,0)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -571,7 +580,7 @@ class wall extends physical{
                 }else if(boxInsideBox(this,this.collide[a][b])&&!this.collide[a][b].dead
                 &&!((this.type==12)&&this.timers[0]>0)&&!((this.type==9||this.type==36)&&this.timers[0]>30)){
                     switch(this.type){
-                        case 2: case 3: case 4: case 6: case 7: case 8: case 10: case 17: case 18: case 19:
+                        case 2: case 3: case 4: case 6: case 7: case 8: case 10: case 17: case 18: case 19: case 48:
                             this.collide[a][b].dead=true
                         break
                         case 9: case 36:

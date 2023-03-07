@@ -26,7 +26,13 @@ function displayLocation(layer,position){
 	layer.noStroke()
 	layer.fill(0)
 	layer.textSize(20)
-	layer.text('('+position.x+','+position.y+')',layer.width/2,layer.height-20)
+	layer.text('('+position.x+','+position.y+')',layer.width/2,layer.height-40)
+}
+function displayTimer(layer,time){
+	layer.noStroke()
+	layer.fill(0)
+	layer.textSize(20)
+	layer.text(ceil(time/6)/10,layer.width/2,40)
 }
 function displayTransition(layer,transition){
 	layer.noStroke()

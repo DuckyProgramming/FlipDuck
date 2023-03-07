@@ -27,8 +27,10 @@ function draw(){
 			}
 			displayBorder(graphics.main,game.edge)
 			displayLocation(graphics.main,game.position)
+			displayTimer(graphics.main,game.timer)
 		break
 	}
+	game.timer++
 	stage.scale=min(width/graphics.main.width,height/graphics.main.height)
 	displayTransition(graphics.main,transition)
 	image(graphics.main,width/2-stage.scale*graphics.main.width/2,height/2-stage.scale*graphics.main.height/2,stage.scale*graphics.main.width,stage.scale*graphics.main.height)
