@@ -266,6 +266,14 @@ class wall extends physical{
                 this.layer.rect(0,0,this.width+4,this.height+4)
                 for(let g=0,lg=this.mapCalculate.length;g<lg;g++){
                     for(let h=0,lh=this.mapCalculate[g].length;h<lh;h++){
+                        if(this.mapCrystal[g][h]==1||this.mapCrystal[max(0,g-5)][h]==1){
+                            this.layer.fill(100,this.fade)
+                            this.layer.rect(-this.width/2+10+h*20,-this.height/2+10+g*20,98,98)
+                        }
+                    }
+                }
+                for(let g=0,lg=this.mapCalculate.length;g<lg;g++){
+                    for(let h=0,lh=this.mapCalculate[g].length;h<lh;h++){
                         switch(this.mapCalculate[g][h]){
                             case 0:
                                 this.layer.fill(0,this.fade)
@@ -277,7 +285,7 @@ class wall extends physical{
                                 this.layer.fill(0,255,0,this.fade)
                             break
                         }
-                        this.layer.rect(-this.width/2+10+h*20,-this.height/2+10+g*20,16,16)
+                        this.layer.rect(-this.width/2+10+h*20,-this.height/2+10+g*20,14,14)
                         if(this.mapCrystal[g][h]==1){
                             this.layer.fill(0,200,255,this.fade)
                             this.layer.quad(-this.width/2+4+h*20,-this.height/2+10+g*20,-this.width/2+10+h*20,-this.height/2+4+g*20,-this.width/2+16+h*20,-this.height/2+10+g*20,-this.width/2+10+h*20,-this.height/2+16+g*20)
