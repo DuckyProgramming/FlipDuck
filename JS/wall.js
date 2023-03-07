@@ -111,7 +111,7 @@ class wall extends physical{
                     }
                 }
             break
-            case 15:
+            case 15: case 46: case 47:
                 this.width-=12
             break
             case 16:
@@ -422,6 +422,14 @@ class wall extends physical{
                 this.layer.fill(200,255,255,this.fade)
                 this.layer.triangle(-7,-5,7,-5,0,7)
             break
+            case 46: case 47:
+                this.layer.fill(150,this.fade)
+                this.layer.rect(0,0,this.width,this.height)
+                this.layer.fill(200,255,255,this.fade)
+                this.layer.quad(-this.width*0.3,0,0,-this.width*0.3,this.width*0.3,0,0,this.width*0.3)
+                this.layer.quad(-this.width*0.3,-this.width*0.8,0,-this.width*1.1,this.width*0.3,-this.width*0.8,0,-this.width*0.5)
+                this.layer.quad(-this.width*0.3,this.width*0.8,0,this.width*1.1,this.width*0.3,this.width*0.8,0,this.width*0.5)
+            break
 		}
 		this.layer.translate(-this.position.x,-this.position.y)
         //super.display()
@@ -520,6 +528,20 @@ class wall extends physical{
             break
             case 44: case 45:
                 this.velocity.y*=1-physics.resistance
+            break
+            case 46: case 47:
+                this.temp=false
+                for(let a=0,la=levels.length;a<la;a++){
+                    if(levels[a].crystal&&!levels[a].entered){
+                        this.temp=true
+                    }
+                }
+                if(!this.temp&&this.type==46){
+                    this.position.y--
+                }
+                if(!this.temp&&this.type==47){
+                    this.position.y++
+                }
             break
         }
 		for(let a=0,la=this.collide.length;a<la;a++){
